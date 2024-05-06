@@ -1,4 +1,7 @@
-return {
+config = {
     maxDistance = 25,
-    openKeybind = ""
+    openKeybind = false,
+    openCommand = 'cam'
 }
+
+return config

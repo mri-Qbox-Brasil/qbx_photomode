@@ -1,5 +1,4 @@
 local SendNUIMessage = SendNUIMessage
-local config = require 'config.client'
 
 local FOV_MAX = 79.5
 local FOV_MIN = 7.6
@@ -281,16 +280,27 @@ RegisterNUICallback('getLocales', function(_, cb)
     })
 end)
 
-lib.addKeybind({
-    name = 'photomode',
-    description = locale('open'),
-    defaultKey = config.openKeybind,
-    onPressed = function()
-        if inCam then
-            resetCamera()
-            return
-        end
+if config.openKeybind then
+    lib.addKeybind({
+        name = 'photomode',
+        description = locale('open'),
+        defaultKey = config.openKeybind,
+        onPressed = function()
+            if inCam then
+                resetCamera()
+                return
+            end
 
-        openCamera()
+            openCamera()
+        end
+    })
+end
+
+lib.callback.register('qbx_photomode:client:openCamera', function()
+    if inCam then
+        resetCamera()
+        return
     end
-})
+
+    openCamera()
+end)

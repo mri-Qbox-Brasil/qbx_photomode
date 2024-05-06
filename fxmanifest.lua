@@ -9,15 +9,24 @@ version '1.0.1'
 ox_lib 'locale'
 
 ui_page 'html/index.html'
+
 files {
     'html/*',
     'config/client.lua',
     'locales/*'
 }
 
-client_scripts {
+shared_scripts {
     '@ox_lib/init.lua',
+    'config/client.lua'
+}
+
+client_scripts {
     'client/main.lua'
+}
+
+server_scripts {
+    'server/main.lua'
 }
 
 lua54 'yes'
